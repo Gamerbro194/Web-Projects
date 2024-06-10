@@ -3,23 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entry</title>
+    <title>My Websites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        .body{
-            display: flex;
-            background-color: lightcoral;
-            justify-content: center;
-            align-items: center;
-            font-family: Garamond;
-        }
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #4A90E2;
+}
+
+header p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #777;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.link-card {
+    background: #4A90E2;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.link-card:hover {
+    background: #357ABD;
+}
+
+.link-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.link-card a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.link-card a:hover {
+    color: #FFD700;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #777;
+}
     </style>
 </head>
 <body>
-    <p>
-        This is the entry to my website. Every link is shown here
-    </p>
-
-    <a href="Tic-Tac-Toe.html">Tic-Tac-Toe</a>
-    <a href="Clock.html">Clock</a>
+    <div class="container">
+        <header>
+            <h1>Welcome to My Websites</h1>
+            <p>Here are some links to my other websites. Feel free to explore!</p>
+        </header>
+        <main>
+            <div class="link-card">
+                <h2>Website 1</h2>
+                <a href="https://example1.com" target="_blank">Visit Website 1</a>
+            </div>
+            <div class="link-card">
+                <h2>Website 2</h2>
+                <a href="https://example2.com" target="_blank">Visit Website 2</a>
+            </div>
+            <div class="link-card">
+                <h2>Website 3</h2>
+                <a href="https://example3.com" target="_blank">Visit Website 3</a>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Gamerbro's Websites. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
