@@ -2,113 +2,268 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Websites</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Tic_Tac_Toe</title>
     <style>
-        * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
+*{
+    color: white;
+    font-family: sans-serif;
+    transition: 0.2s ease-in-out;
+    user-select: none;
 }
 
-body {
-    background-color: #f4f4f9;
-    color: #333;
+.align{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+
+body{
+    background-color: #252A34;
     margin: 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 800px;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding: 0;
+    width: 100vw;
     text-align: center;
+    padding-top: 5vh;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #4A90E2;
+.turn-container{
+    width: 170px;
+    height: 80px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
 }
 
-header p {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    color: #777;
+.turn-container h3{
+    margin: 0;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.turn-container .turn-box{
+    border: 3px solid #000;
+    font-size: 1.6rem;
+    font-weight: 700;
 }
 
-.link-card {
-    background: #4A90E2;
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    transition: background 0.3s;
+.turn-container .turn-box:nth-child(even){
+    border-right: none;
 }
 
-.link-card:hover {
-    background: #357ABD;
+.bg{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 85px;
+    height: 40px;
+    background-color: #FF2E63;
+    z-index: -1;
 }
 
-.link-card h2 {
+.win-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+}
+
+.win-x, .win-o {
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin: 5px 0;
 }
 
-.link-card a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    transition: color 0.3s;
+.win-x {
+    color: #FF2E63;
 }
 
-.link-card a:hover {
-    color: #FFD700;
+.win-o {
+    color: #08D9D6;
 }
 
-footer {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #777;
+.reset-button {
+    background-color: #FF2E63;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.reset-button:hover {
+    background-color: #08D9D6;
+}
+
+.main-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 250px;
+    width: 250px;
+    margin: 30px auto;
+    border: 2px solid #000;
+}
+
+.box{
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 700;
+    border: 2px solid #000;
+}
+
+.box:hover{
+    background-color: #FF2E63;
+}
+
+#play-again{
+    background-color: #FF2E63;
+    padding: 10px 25px;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+#play-again:hover{
+    padding: 10px 40px;
+    background-color: #08D9D6;
+    color: #000;
 }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Welcome to My Websites</h1>
-            <p>Here are some links to my other websites. Feel free to explore!</p>
-        </header>
-        <main>
-            <div class="link-card">
-                <h2>Website 1</h2>
-                <a href="https://github.com/Gamerbro194/Code-is-life/blob/b4305fc0786da00d1929bac9182733d0c6e1883b/Tic-Tac-Toe.html" target="_blank">Tic Tac Toe</a>
-            </div>
-            <div class="link-card">
-                <h2>Website 2</h2>
-                <a href="https://github.com/Gamerbro194/Code-is-life/blob/566504c356462c0d4d937a2cea36b02da46e8f35/Clock.html" target="_blank">Clock</a>
-            </div>
-            <div class="link-card">
-                <h2>Website 3</h2>
-                <a href="https://example3.com" target="_blank">Visit Website 3</a>
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2024 Gamerbro's Websites. All rights reserved.</p>
-        </footer>
+    <div class="turn-container">
+        <h3>Turn For</h3>
+        <div class="turn-box align">X</div>
+        <div class="turn-box align">O</div>
+        <div class="bg"></div>
     </div>
+    <div class="win-counter">
+        <div class="win-x">X: <span id="playerXWins">0</span></div>
+        <div class="win-o">O: <span id="playerOWins">0</span></div>
+        <button id="reset-counter" class="reset-button">Reset Counter</button>
+    </div>
+    <div class="main-grid">
+        <div class="box align">0</div>
+        <div class="box align">1</div>
+        <div class="box align">2</div>
+        <div class="box align">3</div>
+        <div class="box align">4</div>
+        <div class="box align">5</div>
+        <div class="box align">6</div>
+        <div class="box align">7</div>
+        <div class="box align">8</div>
+    </div>
+    <h2 id="results"></h2>
+    <button id="play-again">Play Again</button>
+    <script>
+        let boxes = document.querySelectorAll(".box");
+
+let turn = "X";
+let isGameOver = false;
+let playerXWins = 0;
+let playerOWins = 0;
+
+const playerXWinsElement = document.getElementById('playerXWins');
+const playerOWinsElement = document.getElementById('playerOWins');
+const resetCounterButton = document.getElementById('reset-counter');
+
+boxes.forEach(e => {
+    e.innerHTML = "";
+    e.addEventListener("click", () => {
+        if (!isGameOver && e.innerHTML === "") {
+            e.innerHTML = turn;
+            checkWin();
+            checkDraw();
+            changeTurn();
+        }
+    });
+});
+
+resetCounterButton.addEventListener('click', resetCounter);
+
+function changeTurn() {
+    if (turn === "X") {
+        turn = "O";
+        document.querySelector(".bg").style.left = "85px";
+    } else {
+        turn = "X";
+        document.querySelector(".bg").style.left = "0";
+    }
+}
+
+function checkWin() {
+    let winConditions = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+    ];
+    for (let i = 0; i < winConditions.length; i++) {
+        let v0 = boxes[winConditions[i][0]].innerHTML;
+        let v1 = boxes[winConditions[i][1]].innerHTML;
+        let v2 = boxes[winConditions[i][2]].innerHTML;
+
+        if (v0 != "" && v0 === v1 && v0 === v2) {
+            isGameOver = true;
+            document.querySelector("#results").innerHTML = turn + " wins!";
+            document.querySelector("#play-again").style.display = "inline";
+
+            if (turn === "X") {
+                playerXWins++;
+                playerXWinsElement.innerText = playerXWins;
+            } else {
+                playerOWins++;
+                playerOWinsElement.innerText = playerOWins;
+            }
+
+            for (let j = 0; j < 3; j++) {
+                boxes[winConditions[i][j]].style.backgroundColor = "#08D9D6";
+                boxes[winConditions[i][j]].style.color = "#000";
+            }
+            return;
+        }
+    }
+}
+
+function checkDraw() {
+    if (!isGameOver) {
+        let isDraw = true;
+        boxes.forEach(e => {
+            if (e.innerHTML === "") isDraw = false;
+        });
+
+        if (isDraw) {
+            isGameOver = true;
+            document.querySelector("#results").innerHTML = "Draw";
+            document.querySelector("#play-again").style.display = "inline";
+        }
+    }
+}
+
+document.querySelector("#play-again").addEventListener("click", () => {
+    isGameOver = false;
+    turn = "X";
+    document.querySelector(".bg").style.left = "0";
+    document.querySelector("#results").innerHTML = "";
+    document.querySelector("#play-again").style.display = "none";
+
+    boxes.forEach(e => {
+        e.innerHTML = "";
+        e.style.removeProperty("background-color");
+        e.style.color = "#fff";
+    });
+});
+
+function resetCounter() {
+    playerXWins = 0;
+    playerOWins = 0;
+    playerXWinsElement.innerText = playerXWins;
+    playerOWinsElement.innerText = playerOWins;
+}
+    </script>
 </body>
 </html>
