@@ -133,6 +133,13 @@ body{
     background-color: #08D9D6;
     color: #000;
 }
+
+.anchor{
+    display: flex;
+    height: -1px;
+    justify-content: center;
+    align-items: center;
+}
     </style>
 </head>
 <body>
@@ -160,7 +167,9 @@ body{
     </div>
     <h2 id="results"></h2>
     <button id="play-again">Play Again</button>
-    <a href="Clock.html">Clock</a>
+    <div class="anchor">
+        <a href="Clock.html">Clock</a>
+    </div>
     <script>
         let boxes = document.querySelectorAll(".box");
 
