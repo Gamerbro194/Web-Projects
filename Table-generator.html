@@ -3,101 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatic Table Generator</title>
+    <title>Maths Table Generator</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
 
-h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
+        h1 {
+            margin-bottom: 20px;
+        }
 
-.input-group {
-    margin-bottom: 20px;
-}
+        .input-group {
+            margin-bottom: 20px;
+        }
 
-label {
-    margin-right: 10px;
-}
+        label {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
 
-input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    margin-right: 10px;
-}
+        input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
 
-button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
 
-button:hover {
-    background-color: #0056b3;
-}
+        button:hover {
+            background-color: #ff3b2f;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
 
-th, td {
-    padding: 10px;
-    text-align: left;
-}
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-th {
-    background-color: #f2f2f2;
-}
+        td {
+            background-color: #f2f2f2;
+            color: black;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Automatic Table Generator</h1>
+        <h1>Maths Table Generator</h1>
         <div class="input-group">
-            <label for="rows">Number of Rows:</label>
+            <label for="number">Number:</label>
+            <input type="number" id="number" name="number" min="1" value="1">
+            <label for="rows">Rows:</label>
             <input type="number" id="rows" name="rows" min="1" value="10">
             <button onclick="generateTable()">Generate Table</button>
         </div>
         <div id="table-container"></div>
     </div>
     <script>
-    function generateTable() {
-    const rows = document.getElementById('rows').value;
-    let table = '<table><thead><tr><th>#</th><th>Data</th></tr></thead><tbody>';
-    
-    for (let i = 1; i <= rows; i++) {
-        table += `<tr><td>${i}</td><td>Row ${i}</td></tr>`;
-    }
-    
-    table += '</tbody></table>';
-    
-    document.getElementById('table-container').innerHTML = table;
-}
+        function generateTable() {
+            const number = document.getElementById('number').value;
+            const rows = document.getElementById('rows').value;
+            let table = '<table><thead><tr><th>Multiplicand</th><th>Multiplier</th><th>Product</th></tr></thead><tbody>';
+            
+            for (let i = 1; i <= rows; i++) {
+                table += `<tr><td>${number}</td><td>${i}</td><td>${number * i}</td></tr>`;
+            }
+            
+            table += '</tbody></table>';
+            
+            document.getElementById('table-container').innerHTML = table;
+        }
     </script>
 </body>
 </html>
