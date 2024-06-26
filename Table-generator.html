@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maths Table Generator</title>
+    <title>Multiplication Table Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #fff;
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         h1 {
             margin-bottom: 20px;
+            color: #333;
         }
 
         .input-group {
@@ -38,53 +38,54 @@
         }
 
         input[type="number"] {
-            width: 80px;
-            padding: 10px;
+            width: 60px;
+            padding: 8px;
             margin-right: 10px;
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 1em;
         }
 
         button {
-            padding: 10px 20px;
-            background-color: #ff6f61;
+            padding: 8px 20px;
+            background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1em;
         }
 
         button:hover {
-            background-color: #ff3b2f;
+            background-color: #0056b3;
         }
 
         table {
             width: 100%;
-            margin-top: 20px;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         th, td {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ddd;
+            text-align: center;
         }
 
         th {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #f2f2f2;
+            color: #333;
         }
 
         td {
-            background-color: #f2f2f2;
-            color: black;
+            background-color: #fff;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Maths Table Generator</h1>
+        <h1>Multiplication Table Generator</h1>
         <div class="input-group">
             <label for="number">Number:</label>
             <input type="number" id="number" name="number" min="1" value="1">
@@ -94,18 +95,20 @@
         </div>
         <div id="table-container"></div>
     </div>
+
     <script>
         function generateTable() {
             const number = document.getElementById('number').value;
             const rows = document.getElementById('rows').value;
+
             let table = '<table><thead><tr><th>Multiplicand</th><th>Multiplier</th><th>Product</th></tr></thead><tbody>';
-            
+
             for (let i = 1; i <= rows; i++) {
                 table += `<tr><td>${number}</td><td>${i}</td><td>${number * i}</td></tr>`;
             }
-            
+
             table += '</tbody></table>';
-            
+
             document.getElementById('table-container').innerHTML = table;
         }
     </script>
