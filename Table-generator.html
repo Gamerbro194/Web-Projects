@@ -10,10 +10,12 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Changed to flex-start to allow scrolling */
+            padding: 20px; /* Added padding to create space at the top */
             height: 100vh;
             margin: 0;
             color: #333;
+            overflow-y: auto; /* Ensures vertical scrolling */
         }
 
         .container {
