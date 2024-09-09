@@ -112,35 +112,38 @@ if (hiscore === null) {
 
 window.requestAnimationFrame(main);
 window.addEventListener("keydown", (e) => {
-  inputDir = { x: 0, y: 1 };
-  moveSound.play();
+  let prevDir = inputDir;
   switch (e.key) {
     case "ArrowUp":
     case "w":
-    case "W":
+      moveSound.play();
       inputDir.x = 0;
       inputDir.y = -1;
       break;
 
     case "ArrowDown":
     case "s":
-    case "S":
+      moveSound.play();
       inputDir.x = 0;
       inputDir.y = 1;
       break;
 
     case "ArrowLeft":
     case "a":
-    case "A":
+      moveSound.play();
       inputDir.x = -1;
       inputDir.y = 0;
       break;
 
     case "ArrowRight":
     case "d":
-    case "D":
+      moveSound.play();
       inputDir.x = 1;
       inputDir.y = 0;
+      break;
+    default:
+      inputDir = prevDir;
+      e.preventDefault();
       break;
   }
 });
