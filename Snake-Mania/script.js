@@ -112,7 +112,6 @@ if (hiscore === null) {
 
 window.requestAnimationFrame(main);
 window.addEventListener("keydown", (e) => {
-  let prevDir = inputDir;
   switch (e.key) {
     case "ArrowUp":
     case "w":
@@ -142,8 +141,5 @@ window.addEventListener("keydown", (e) => {
       inputDir.y = 0;
       break;
     default:
-      inputDir = prevDir;
-      e.preventDefault();
-      break;
   }
 });
