@@ -140,6 +140,5 @@ window.addEventListener("keydown", (e) => {
       inputDir.x = 1;
       inputDir.y = 0;
       break;
-    default:
   }
 });
