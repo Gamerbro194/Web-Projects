@@ -10,36 +10,31 @@ let snakeArr = [{ x: 13, y: 15 }];
 
 food = { x: 6, y: 7 };
 
-function main(ctime) {
+function main(ctime){
   window.requestAnimationFrame(main);
-  if ((ctime - lastPaintTime) / 1000 < 1 / speed) {
+  if ((ctime - lastPaintTime) / 1000 < 1 / speed){
     return;
   }
   lastPaintTime = ctime;
   gameEngine();
 }
 
-function isCollide(snake) {
-  for (let i = 1; i < snakeArr.length; i++) {
-    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+function isCollide(snake){
+  for (let i = 1; i < snakeArr.length; i++){
+    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y){
       return true;
     }
   }
-  if (
-    snake[0].x >= 18 ||
-    snake[0].x <= 0 ||
-    snake[0].y >= 18 ||
-    snake[0].y <= 0
-  ) {
+  if (snake[0].x >= 18 || snake[0].x <= 0 || snake[0].y >= 18 || snake[0].y <= 0){
     return true;
   }
 
   return false;
 }
 
-function gameEngine() {
+function gameEngine(){
   musicSound.play();
-  if (isCollide(snakeArr)) {
+  if (isCollide(snakeArr)){
     gameOverSound.play();
     musicSound.pause();
     inputDir = { x: 0, y: 0 };
@@ -47,19 +42,23 @@ function gameEngine() {
     snakeArr = [{ x: 13, y: 15 }];
     musicSound.play();
     score = 0;
+    speed = 10;
   }
 
   scoreBox.innerHTML = "Score: " + score;
 
-  if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
+  if (snakeArr[0].y === food.y && snakeArr[0].x === food.x){
     foodSound.play();
     score += 1;
-    if (score > hiscoreval) {
+    if (score > hiscoreval){
       hiscoreval = score;
       localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
       hiscoreBox.innerHTML = "HiScore: " + hiscoreval;
     }
     scoreBox.innerHTML = "Score: " + score;
+    if (score % 10 === 0 && score !== 0){
+      speed++;
+    }
     snakeArr.unshift({
       x: snakeArr[0].x + inputDir.x,
       y: snakeArr[0].y + inputDir.y,
@@ -72,7 +71,7 @@ function gameEngine() {
     };
   }
 
-  for (let i = snakeArr.length - 2; i >= 0; i--) {
+  for (let i = snakeArr.length - 2; i >= 0; i--){
     snakeArr[i + 1] = { ...snakeArr[i] };
   }
 
@@ -85,9 +84,10 @@ function gameEngine() {
     snakeElement.style.gridRowStart = e.y;
     snakeElement.style.gridColumnStart = e.x;
 
-    if (index === 0) {
+    if (index === 0){
       snakeElement.classList.add("head");
-    } else {
+    }
+    else{
       snakeElement.classList.add("snake");
     }
     board.appendChild(snakeElement);
@@ -102,43 +102,44 @@ function gameEngine() {
 
 musicSound.play();
 let hiscore = localStorage.getItem("hiscore");
-if (hiscore === null) {
+if (hiscore === null){
   hiscoreval = 0;
   localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
-} else {
+}
+else{
   hiscoreval = JSON.parse(hiscore);
   hiscoreBox.innerHTML = "HiScore: " + hiscore;
 }
 
 window.requestAnimationFrame(main);
 window.addEventListener("keydown", (e) => {
-  switch (e.key) {
+  switch (e.key){
     case "ArrowUp":
     case "w":
-      moveSound.play();
       inputDir.x = 0;
       inputDir.y = -1;
+      moveSound.play();
       break;
 
     case "ArrowDown":
     case "s":
-      moveSound.play();
       inputDir.x = 0;
       inputDir.y = 1;
+      moveSound.play();
       break;
 
     case "ArrowLeft":
     case "a":
-      moveSound.play();
       inputDir.x = -1;
       inputDir.y = 0;
+      moveSound.play();
       break;
 
     case "ArrowRight":
     case "d":
-      moveSound.play();
       inputDir.x = 1;
       inputDir.y = 0;
+      moveSound.play();
       break;
-  }
+   }
 });
