@@ -116,30 +116,45 @@ window.addEventListener("keydown", (e) => {
   switch (e.key){
     case "ArrowUp":
     case "w":
-      inputDir.x = 0;
-      inputDir.y = -1;
-      moveSound.play();
+    case "W":
+      if (inputDir.y !== 1 || inputDir.y === 0){
+        inputDir.x = 0;
+        inputDir.y = -1;
+        moveSound.play();
+        break;
+      }
       break;
 
     case "ArrowDown":
     case "s":
-      inputDir.x = 0;
-      inputDir.y = 1;
-      moveSound.play();
+    case "S":
+      if (inputDir.y !== -1 || inputDir.y === 0){
+        inputDir.x = 0;
+        inputDir.y = 1;
+        moveSound.play();
+        break;
+      }
       break;
 
     case "ArrowLeft":
     case "a":
-      inputDir.x = -1;
-      inputDir.y = 0;
-      moveSound.play();
+    case "A":
+      if (inputDir.x !== 1 || inputDir.x === 0){
+        inputDir.x = -1;
+        inputDir.y = 0;
+        moveSound.play();
+        break;
+      }
       break;
 
     case "ArrowRight":
     case "d":
+    case "D":
+      if (inputDir.x !== -1 || inputDir.x === 0){
       inputDir.x = 1;
       inputDir.y = 0;
       moveSound.play();
       break;
-   }
-});
+      }
+      break;
+}});
