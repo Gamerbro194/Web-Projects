@@ -10,6 +10,7 @@ const musicSound = new Audio("music/music.mp3");
 const bonusSound = new Audio("music/bonus.mp3");
 let speed = 10;
 
+
 function main(ctime){
   window.requestAnimationFrame(main);
   if ((ctime - lastPaintTime) / 1000 < 1 / speed){
@@ -34,6 +35,7 @@ function isCollide(snake){
 
 function gameEngine(){
   musicSound.play();
+
   if (isCollide(snakeArr)){
     gameOverSound.play();
     musicSound.pause();
@@ -51,6 +53,7 @@ function gameEngine(){
     if (score % 20 == 0 && score != 0){
       bonusSound.play();
       score += 5;
+      speed -= 2;
     }
     else{
       foodSound.play();
@@ -76,12 +79,14 @@ function gameEngine(){
 
     snakeArr.unshift(newHead);
 
-    let a = 2;
-    let b = 16;
-    food = {
-      x: Math.round(a + (b - a) * Math.random()),
-      y: Math.round(a + (b - a) * Math.random()),
-    };
+    while (snakeArr.some(snakePart => snakePart.x === food.x && snakePart.y === food.y)){
+      let a = 2;
+      let b = 16;
+      food = {
+        x: Math.round(a + (b - a) * Math.random()),
+        y: Math.round(a + (b - a) * Math.random()),
+      };
+    }
   }
 
   for (let i = snakeArr.length - 1; i > 0; i--){
