@@ -5,7 +5,7 @@
 }
 
 .body {
-  background: url("images/Snake-Mania.jpg");
+  background: url("Snake-Mania.jpg");
   min-height: 100vh;
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
@@ -42,6 +42,31 @@
   grid-template-columns: repeat(18, 1fr);
 }
 
+#instructions {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 390px;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "New Tegomin", serif;
+}
+
+#instructions h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#instructions ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+#instructions li {
+  margin-bottom: 5px;
+}
+
 .head {
   background: linear-gradient(rgb(207, 240, 124), rgb(129, 228, 137));
   border: 2px solid rgb(34, 4, 34);
@@ -57,6 +82,12 @@
 
 .food {
   background: linear-gradient(red, purple);
+  border: 0.25vmin solid black;
+  border-radius: 8px;
+}
+
+.bonus {
+  background: linear-gradient(cyan, white);
   border: 0.25vmin solid black;
   border-radius: 8px;
 }

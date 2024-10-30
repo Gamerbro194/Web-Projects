@@ -11,37 +11,36 @@ const bonusSound = new Audio("music/bonus.mp3");
 let speed = 10;
 
 
-function main(ctime){
+function main(ctime) {
   window.requestAnimationFrame(main);
-  if ((ctime - lastPaintTime) / 1000 < 1 / speed){
+  if ((ctime - lastPaintTime) / 1000 < 1 / speed) {
     return;
   }
   lastPaintTime = ctime;
   gameEngine();
 }
 
-function isCollide(snake){
-  for (let i = 1; i < snakeArr.length; i++){
-    if (snake[i].x == snake[0].x && snake[i].y == snake[0].y){
+function isCollide(snake) {
+  for (let i = 1; i < snakeArr.length; i++) {
+    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
       return true;
     }
   }
-  if (snake[0].x >= 18 || snake[0].x <= 0 || snake[0].y >= 18 || snake[0].y <= 0){
+  if (snake[0].x >= 18 || snake[0].x <= 0 || snake[0].y >= 18 || snake[0].y <= 0) {
     return true;
   }
-
   return false;
 }
 
-function gameEngine(){
+function gameEngine() {
   musicSound.play();
 
-  if (isCollide(snakeArr)){
+  if (isCollide(snakeArr)) {
+    snakeArr = [{ x: 13, y: 15 }];
     gameOverSound.play();
     musicSound.pause();
     inputDir = { x: 0, y: 0 };
     alert("Game Over. Press any key to play again!");
-    snakeArr = [{ x: 13, y: 15 }];
     musicSound.play();
     score = 0;
     speed = 10;
@@ -49,18 +48,18 @@ function gameEngine(){
 
   scoreBox.innerHTML = "Score: " + score;
 
-  if (snakeArr[0].y == food.y && snakeArr[0].x == food.x){
-    if (score % 20 == 0 && score != 0){
+  if (snakeArr[0].y == food.y && snakeArr[0].x == food.x) {
+    if (score % 20 == 0 && score != 0) {
       bonusSound.play();
       score += 5;
       speed -= 2;
     }
-    else{
+    else {
       foodSound.play();
       score++;
     }
 
-    if (score > hiscoreval){
+    if (score > hiscoreval) {
       hiscoreval = score;
       localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
       hiscoreBox.innerHTML = "HiScore: " + hiscoreval;
@@ -68,7 +67,7 @@ function gameEngine(){
 
     scoreBox.innerHTML = "Score: " + score;
 
-    if (score % 5 == 0 && score != 0){
+    if (score % 5 == 0 && score != 0) {
       speed++;
     }
 
@@ -79,17 +78,15 @@ function gameEngine(){
 
     snakeArr.unshift(newHead);
 
-    while (snakeArr.some(snakePart => snakePart.x === food.x && snakePart.y === food.y)){
-      let a = 2;
-      let b = 16;
+    while (snakeArr.some(snakePart => snakePart.x === food.x && snakePart.y === food.y)) {
       food = {
-        x: Math.round(a + (b - a) * Math.random()),
-        y: Math.round(a + (b - a) * Math.random()),
+        x: Math.round(2 + (16 - 2) * Math.random()),
+        y: Math.round(2 + (16 - 2) * Math.random()),
       };
     }
   }
 
-  for (let i = snakeArr.length - 1; i > 0; i--){
+  for (let i = snakeArr.length - 1; i > 0; i--) {
     snakeArr[i].x = snakeArr[i - 1].x;
     snakeArr[i].y = snakeArr[i - 1].y;
   }
@@ -98,15 +95,16 @@ function gameEngine(){
   snakeArr[0].y += inputDir.y;
 
   board.innerHTML = "";
+
   snakeArr.forEach((e, index) => {
     let snakeElement = document.createElement("div");
     snakeElement.style.gridRowStart = e.y;
     snakeElement.style.gridColumnStart = e.x;
 
-    if (index === 0){
+    if (index === 0) {
       snakeElement.classList.add("head");
     }
-    else{
+    else {
       snakeElement.classList.add("snake");
     }
 
@@ -117,28 +115,32 @@ function gameEngine(){
   let foodElement = document.createElement("div");
   foodElement.style.gridRowStart = food.y;
   foodElement.style.gridColumnStart = food.x;
-  foodElement.classList.add("food");
+  if (score % 20 == 0 && score != 0) {
+    foodElement.classList.add("bonus");
+  }
+  else {
+    foodElement.classList.add("food");
+  }
   board.appendChild(foodElement);
 }
 
-musicSound.play();
 let hiscore = localStorage.getItem("hiscore");
-if (hiscore === null){
+if (hiscore === null) {
   hiscoreval = 0;
   localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
 }
-else{
+else {
   hiscoreval = JSON.parse(hiscore);
   hiscoreBox.innerHTML = "HiScore: " + hiscore;
 }
 
 window.requestAnimationFrame(main);
 window.addEventListener("keydown", (e) => {
-  switch (e.key){
+  switch (e.key) {
     case "ArrowUp":
     case "w":
     case "W":
-      if (inputDir.y !== 1 || inputDir.y === 0){
+      if (inputDir.y !== 1 || inputDir.y === 0) {
         inputDir.x = 0;
         inputDir.y = -1;
         moveSound.play();
@@ -149,7 +151,7 @@ window.addEventListener("keydown", (e) => {
     case "ArrowDown":
     case "s":
     case "S":
-      if (inputDir.y !== -1 || inputDir.y === 0){
+      if (inputDir.y !== -1 || inputDir.y === 0) {
         inputDir.x = 0;
         inputDir.y = 1;
         moveSound.play();
@@ -160,7 +162,7 @@ window.addEventListener("keydown", (e) => {
     case "ArrowLeft":
     case "a":
     case "A":
-      if (inputDir.x !== 1 || inputDir.x === 0){
+      if (inputDir.x !== 1 || inputDir.x === 0) {
         inputDir.x = -1;
         inputDir.y = 0;
         moveSound.play();
@@ -171,11 +173,12 @@ window.addEventListener("keydown", (e) => {
     case "ArrowRight":
     case "d":
     case "D":
-      if (inputDir.x !== -1 || inputDir.x === 0){
-      inputDir.x = 1;
-      inputDir.y = 0;
-      moveSound.play();
-      break;
+      if (inputDir.x !== -1 || inputDir.x === 0) {
+        inputDir.x = 1;
+        inputDir.y = 0;
+        moveSound.play();
+        break;
       }
       break;
-}});
+  }
+});
