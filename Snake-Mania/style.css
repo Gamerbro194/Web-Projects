@@ -87,7 +87,7 @@
 }
 
 .bonus {
-  background: linear-gradient(cyan, white);
+  background-color: #6495ED;
   border: 0.25vmin solid black;
   border-radius: 8px;
 }
